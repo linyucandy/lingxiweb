@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制造业 AI 员工市场分析报告 · 灵犀协同智能</title>
+<style>
+  :root{
+    --bg:#0a0e17; --bg2:#0f1524; --card:#141b2d; --card2:#1a2338;
+    --line:#253049; --line2:#33415e;
+    --txt:#e6ebf5; --sub:#9fb0cc; --dim:#6b7c99;
+    --acc:#4cc9f0; --acc2:#7b8cff; --ok:#34d399; --warn:#fbbf24; --warnbg:rgba(251,191,36,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  a{color:var(--acc);text-decoration:none}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#0d1322 0%,#0a0e17 60%),radial-gradient(800px 400px at 80% -10%,rgba(76,201,240,.18),transparent 60%),radial-gradient(600px 300px at 10% 110%,rgba(123,140,255,.14),transparent 60%);border-bottom:1px solid var(--line);padding:72px 0 56px}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(76,201,240,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(76,201,240,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.6),transparent);pointer-events:none}
+  .hero .wrap{position:relative}
+  .tagrow{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .tag{font-size:12px;letter-spacing:.08em;padding:4px 12px;border:1px solid var(--line2);border-radius:999px;color:var(--sub);background:rgba(20,27,45,.7)}
+  .tag.hot{color:#0a0e17;background:linear-gradient(90deg,var(--acc),var(--acc2));border-color:transparent;font-weight:700}
+  h1{font-size:clamp(28px,5vw,46px);line-height:1.25;font-weight:800;letter-spacing:.01em}
+  h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .sub{margin-top:16px;color:var(--sub);max-width:820px;font-size:15.5px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-top:34px}
+  .kpi{background:linear-gradient(180deg,rgba(26,35,56,.9),rgba(20,27,45,.9));border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .kpi .n{font-size:26px;font-weight:800;color:var(--acc);letter-spacing:.01em}
+  .kpi .n.v2{color:var(--acc2)} .kpi .n.v3{color:var(--ok)} .kpi .n.v4{color:var(--warn)}
+  .kpi .l{font-size:13px;color:var(--sub);margin-top:6px}
+  .kpi .src{font-size:11.5px;color:var(--dim);margin-top:8px}
+  .alert{margin-top:26px;background:var(--warnbg);border:1px solid rgba(251,191,36,.35);border-left:4px solid var(--warn);border-radius:10px;padding:14px 18px;font-size:14px;color:#fde9c0}
+  .alert b{color:var(--warn)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(10,14,23,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
+  nav .wrap::-webkit-scrollbar{display:none}
+  nav a{flex:0 0 auto;font-size:13.5px;color:var(--sub);padding:6px 14px;border-radius:999px;border:1px solid transparent}
+  nav a:hover{color:var(--txt);border-color:var(--line2);background:var(--card)}
+
+  section{padding:56px 0 8px}
+  .shead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .snum{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:#0a0e17;background:linear-gradient(90deg,var(--acc),var(--acc2));padding:3px 10px;border-radius:6px;font-weight:700;letter-spacing:.06em}
+  h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:.01em}
+  .lead{color:var(--sub);font-size:15px;margin:10px 0 24px;max-width:900px}
+  h3{font-size:17px;margin:30px 0 12px;color:#cfe0f7;display:flex;align-items:center;gap:10px}
+  h3::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--acc);flex:0 0 auto;transform:rotate(45deg)}
+
+  /* table */
+  .tbox{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card);margin:6px 0 8px}
+  table{width:100%;border-collapse:collapse;font-size:14.2px;min-width:680px}
+  thead th{background:var(--card2);color:#bcd0ef;text-align:left;font-weight:600;font-size:13px;letter-spacing:.04em;padding:12px 16px;border-bottom:1px solid var(--line2);white-space:nowrap}
+  tbody td{padding:12px 16px;border-bottom:1px solid rgba(37,48,73,.7);vertical-align:top;color:#dbe4f2}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(76,201,240,.045)}
+  td b,td strong{color:#fff}
+  .num{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--acc);font-weight:700;white-space:nowrap}
+  .num.v2{color:var(--acc2)} .num.v3{color:var(--ok)} .num.v4{color:var(--warn)}
+  .muted{color:var(--dim);font-size:13px}
+  .gray{color:#8a93a6;font-style:italic}
+  .foot{font-size:12.5px;color:var(--dim);margin:0 4px 26px;padding-left:2px}
+  .foot::before{content:"来源：";color:#54637f}
+  .foot.warn{color:#c9a458}
+  .foot.warn::before{content:"来源与提示："}
+  .badge{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--sub);margin-left:6px;vertical-align:1px;white-space:nowrap}
+  .badge.g{color:#7ee7c0;border-color:rgba(52,211,153,.4)}
+  .badge.y{color:#ffd98a;border-color:rgba(251,191,36,.4)}
+  .badge.r{color:#f5a8b8;border-color:rgba(244,114,182,.4)}
+
+  /* case cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:6px 0 8px}
+  .cc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .cc .t{font-weight:700;font-size:15.5px;color:#fff}
+  .cc .v{font-size:24px;font-weight:800;color:var(--acc);margin:8px 0 4px;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .cc .v small{font-size:14px;color:var(--sub);font-family:inherit;font-weight:600}
+  .cc .d{font-size:13.5px;color:var(--sub)}
+  .cc .s{font-size:11.5px;color:var(--dim);margin-top:10px}
+  .cc .s::before{content:"来源：";color:#54637f}
+
+  /* section 05 */
+  .opinion{background:linear-gradient(180deg,rgba(123,140,255,.09),rgba(20,27,45,.4));border:1px solid rgba(123,140,255,.35);border-radius:16px;padding:24px 26px;margin-bottom:22px}
+  .opinion .lab{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;color:#0a0e17;background:linear-gradient(90deg,#a5b4fc,var(--acc));padding:4px 12px;border-radius:6px;margin-bottom:12px}
+  .opinion p{color:#d5ddf0;font-size:15px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .panel h4{font-size:15.5px;color:#fff;margin-bottom:10px}
+  .panel ul{list-style:none}
+  .panel li{font-size:14.2px;color:#c9d6ea;padding:7px 0 7px 20px;position:relative;border-bottom:1px dashed rgba(37,48,73,.8)}
+  .panel li:last-child{border-bottom:none}
+  .panel li::before{content:"▸";position:absolute;left:0;color:var(--acc)}
+  .panel li b{color:#fff}
+
+  /* appendix */
+  .appendix{background:var(--bg2);border-top:1px solid var(--line);margin-top:48px;padding:56px 0 72px}
+  ol.srcs{padding-left:22px;columns:2;column-gap:36px}
+  ol.srcs li{font-size:13.5px;color:var(--sub);margin-bottom:9px;break-inside:avoid}
+  ol.srcs li b{color:#cfe0f7}
+  .todo{background:var(--warnbg);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:20px 24px;margin-top:26px}
+  .todo h4{color:var(--warn);font-size:15.5px;margin-bottom:10px}
+  .todo li{font-size:14px;color:#e8d9b8;margin:8px 0 8px 20px}
+  footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--dim);font-size:12.5px;text-align:center}
+
+  @media (max-width:640px){
+    .hero{padding:52px 0 40px}
+    .kpi .n{font-size:22px}
+    ol.srcs{columns:1}
+    section{padding:44px 0 4px}
+    tbody td,thead th{padding:10px 12px;font-size:13.5px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="tagrow">
+      <span class="tag hot">内部战略使用 · 对外需人类批准</span>
+      <span class="tag">灵犀协同智能</span>
+      <span class="tag">2026-11-01 · v1 公开版</span>
+      <span class="tag">置信度 🟢一手 🟡转引 🔴待核</span>
+    </div>
+    <h1>制造业 <em>AI 员工</em>市场分析报告</h1>
+    <p class="sub">预算在流入、格局未收敛：IDC 口径下中国工业企业 AI 支出 2028 年将近 900 亿元（CAGR 37.7%），企业大模型/智能体渗透率一年内从 9.6% 升至 47.5%。竞品卖工具、平台与席位，「有职责边界的数字岗位」组织化交付在公开材料中仍是空白——以下分析为作者观点，供人类决策。</p>
+    <div class="kpis">
+      <div class="kpi"><div class="n">≈900 亿元</div><div class="l">2028 中国工业企业 AI 支出 · CAGR 37.7%</div><div class="src">IDC（中国经济网 2026-03 转引）🟡</div></div>
+      <div class="kpi"><div class="n v2">9.6% → 47.5%</div><div class="l">企业应用大模型/智能体比例（2024→2025）</div><div class="src">IDC（36氪 转引）🟡</div></div>
+      <div class="kpi"><div class="n v3">1.2 万亿元</div><div class="l">2025 中国 AI 核心产业规模</div><div class="src">工信部发布会 🟢</div></div>
+      <div class="kpi"><div class="n v4">≈8000 元/月</div><div class="l">AI 数字员工岗位市场锚点（另 2 万/年技术支持）</div><div class="src">每日经济新闻 2026-06 🟡</div></div>
+    </div>
+    <div class="alert"><b>⚠ 口径警示：</b>各机构对「AI 智能体 / 数字员工」的边界定义不一（IDC 智能体市场 2025 年 212 亿 vs 爱分析数字员工市场 2025 年 74.7 亿），<b>绝对值不可混用、不可加总</b>，只可分口径看各自趋势。「制造业数字化投入 7100 亿 / AI 专项 900 亿」系二手转引未见原文，本报告不采用。</div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#s1">01 市场规模与预算</a>
+  <a href="#s2">02 竞品格局</a>
+  <a href="#s3">03 收费模式对标</a>
+  <a href="#s4">04 制造业落地案例</a>
+  <a href="#apx">附录 数据来源</a>
+</div></nav>
+
+<!-- ============ 01 ============ -->
+<section id="s1"><div class="wrap">
+  <div class="shead"><span class="snum">01</span><h2>市场规模与预算：钱从哪来</h2></div>
+  <p class="lead">宏观盘子与渗透率同时抬升，制造业 AI 已从试点进入规模化采购前夜；但预算流向不等于流向「AI 员工」品类——灵犀面对的是与数据平台、MES 增值模块、大模型 API 争抢同一笔钱。</p>
+
+  <h3>1.1 宏观盘子</h3>
+  <div class="tbox"><table>
+    <thead><tr><th>指标</th><th>数值</th><th>口径 / 时间</th><th>来源</th><th>置信度</th></tr></thead>
+    <tbody>
+      <tr><td>中国工业企业 AI 支出</td><td class="num">近 900 亿元</td><td>至 2028 年，CAGR 37.7%</td><td>IDC，中国经济网 2026-03 报道</td><td><span class="badge y">🟡 转引</span></td></tr>
+      <tr><td>中国 AI 核心产业规模</td><td class="num v3">破 1.2 万亿元</td><td>2025 年</td><td>工信部发布会</td><td><span class="badge g">🟢 一手</span></td></tr>
+      <tr><td>应用大模型/智能体的企业比例</td><td class="num v2">9.6% → 47.5%</td><td>2024 → 2025 年</td><td>IDC 数据，36氪 转引</td><td><span class="badge y">🟡 转引</span></td></tr>
+    </tbody></table></div>
+  <p class="foot">IDC 经中国经济网 2026-03 报道转引；渗透率经 36氪 转引；产业规模为工信部发布会口径。</p>
+
+  <h3>1.2 细分口径（⚠️ 边界不一，绝对值不可混用）</h3>
+  <div class="tbox"><table>
+    <thead><tr><th>口径</th><th>2025</th><th>远期预测</th><th>CAGR</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td><b>AI 智能体市场</b>（IDC）</td><td class="num">212 亿元</td><td>2029 年 <span class="num v2">3320 亿元</span></td><td>未引用</td><td>IDC，腾讯云转引 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>数字员工市场</b>（爱分析）</td><td class="num">74.7 亿元</td><td>2030 年 <span class="num v2">2098.4 亿元</span></td><td class="num v3">94.9%</td><td>爱分析 2026-07 <span class="badge y">🟡</span></td></tr>
+      <tr><td class="gray">制造业数字化投入 7100 亿 / AI 专项 900 亿</td><td colspan="3" class="gray">二手转引未见 IDC 原文，不采用，仅备查</td><td><span class="badge r">🔴 待核</span></td></tr>
+    </tbody></table></div>
+  <p class="foot warn">两口径 2025 年绝对值相差约 3 倍、终点年份不同，任何「市场规模合计」的说法都不可靠；不采用数据为任务卡标注的未见原文项。</p>
+
+  <h3>1.3 政策推力</h3>
+  <div class="tbox"><table>
+    <thead><tr><th>政策</th><th>时间</th><th>内容</th><th>对灵犀的意义（作者观点）</th></tr></thead>
+    <tbody>
+      <tr><td>纺织/轻工/食品/医药数字化转型方案</td><td>工信部 2025-07</td><td class="num v3">82 个典型场景</td><td>四个行业正是目标客户密度较高处，场景清单可直接映射为销售话术场景库</td></tr>
+    </tbody></table></div>
+  <p class="foot">工业和信息化部 2025 年 7 月发布的行业数字化转型方案。</p>
+</div></section>
+
+<!-- ============ 02 ============ -->
+<section id="s2"><div class="wrap">
+  <div class="shead"><span class="snum">02</span><h2>竞品格局：谁在做「AI 员工 / 数字员工」</h2></div>
+  <p class="lead">四类玩家同场：国内 RPA 系向 AI 员工叙事升级、大厂平台化下压、国外按量/按结果结算、新兴公司按岗定价。市场收费模式尚未收敛。</p>
+
+  <h3>2.1 国内 RPA 系</h3>
+  <div class="tbox"><table>
+    <thead><tr><th>公司</th><th>产品 / 定位</th><th>关键数据</th><th>定价</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td><b>实在智能</b></td><td>Agent + RPA</td><td>客户 6000+；三花 340+ 场景、节省 20 万工时（官网自述）</td><td class="muted">未公开</td><td>官网 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>金智维</b></td><td>RPA + 数字员工，按授权数</td><td>招股书：部署 200 万+、客户 1600+；2023–25 营收 <span class="num">2.17 / 2.43 / 2.56 亿元</span>，连续三年亏损；2026-08 递表港交所 18C</td><td>按授权数</td><td>港交所招股书 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>来也</b></td><td>Laiye Worker</td><td>个人版 ¥39/月、¥199/月档</td><td class="muted">企业版未公开</td><td>官网定价页 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>影刀</b></td><td>RPA</td><td>创业版 ¥499/月；企业版 59800 元/5 账号/年</td><td class="num">59800 元/5 账号/年</td><td>官网 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>弘玑</b></td><td>AI 行动智能体</td><td>中兴「数百名数字同事」案例</td><td class="muted">未公开</td><td>公开案例 <span class="badge y">🟡</span></td></tr>
+    </tbody></table></div>
+  <p class="foot">实在智能案例数据为官网自述、无第三方核验，引用须注明；金智维数据取自港交所招股书（18C 递表）。</p>
+  <p class="lead" style="margin-top:14px"><b style="color:#cfe0f7">观察（作者观点）：</b>金智维「高增长 + 连续亏损 + 按授权收费」是国内变现难度的一手证据——席位制收入模型在制造业客户处的客单价与续费承压，值得灵犀在定价设计时引以为戒。</p>
+
+  <h3>2.2 大厂（平台化下压）</h3>
+  <div class="tbox"><table>
+    <thead><tr><th>厂商</th><th>产品</th><th>发布 / 动作</th><th>收费</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td><b>阿里</b></td><td>QoderWake</td><td>2026-09-08 发布，「一句话生成岗位」</td><td>Credit 池计费</td><td>发布信息 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>字节</b></td><td>豆包工作</td><td>2026-08-25 发布，打通飞书</td><td class="muted">未公开</td><td>发布信息 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>腾讯云</b></td><td>ADP 企业版 + WorkBuddy</td><td>进厂案例：广州视声 PCB 采购评估 2 天 → 半小时</td><td class="num">$2500/月（ADP 企业版）</td><td>腾讯云（官网定价页）<span class="badge g">🟢</span></td></tr>
+    </tbody></table></div>
+  <p class="foot">各厂商发布信息与定价页；腾讯云案例为厂商公开案例材料。</p>
+  <p class="lead" style="margin-top:14px"><b style="color:#cfe0f7">观察（作者观点）：</b>大厂已直接使用「生成岗位」语言，说明「岗位」一词本身不构成护城河；差异要落在行业 know-how、职责边界设计与交付责任上。</p>
+
+  <h3>2.3 国外标杆</h3>
+  <div class="tbox"><table>
+    <thead><tr><th>公司</th><th>产品</th><th>收费 / 关键动态</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td><b>Salesforce</b></td><td>Agentforce / Help Agent</td><td class="num">$2/对话；Help Agent 按解决付费</td><td>官方定价 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>ServiceNow</b></td><td>AI Agent</td><td>按 assists 计量、分层</td><td>官方 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>Cognition</b></td><td>Devin Pro</td><td class="num">$20/月；2026-09 E 轮，估值记载 480 亿美元<span class="muted">（以一手报道为准）</span></td><td>公开报道 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>11x.ai</b></td><td>数字工 Alice</td><td class="num">起 $3750/月</td><td>官网定价页 <span class="badge g">🟢</span></td></tr>
+    </tbody></table></div>
+  <p class="foot">Salesforce 为官方定价页；Cognition 轮次与估值取自公开报道，融资额原文以一手报道为准。</p>
+
+  <h3>2.4 融资动态（2026.8–11，判断资本热度）</h3>
+  <div class="tbox"><table>
+    <thead><tr><th>公司</th><th>轮次 / 金额</th><th>时间</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td><b>Manus</b></td><td>超 5 亿美元融资，投后约 <span class="num v4">40 亿美元</span></td><td>2026-10-08</td><td>公开报道 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>Instinct</b></td><td>10 亿美元 C 轮，估值 <span class="num v4">100 亿美元</span></td><td>2026-09-28</td><td>二手来源 <span class="badge r">🔴</span></td></tr>
+      <tr><td><b>Ema</b></td><td>7700 万美元 B 轮，「AI Employee」定位</td><td>2026 年 Q3</td><td>公开报道 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>Town</b></td><td>融资 1.08 亿美元<span class="muted">（估值未核实，原文称独角兽，存疑）</span></td><td>2026 年 Q3</td><td>公开报道 <span class="badge y">🟡</span></td></tr>
+    </tbody></table></div>
+  <p class="foot">2026 年 8–11 月公开融资报道汇总；Instinct 一条为二手来源。</p>
+  <p class="lead" style="margin-top:14px"><b style="color:#cfe0f7">观察（作者观点）：</b>资本仍在给「AI Employee」叙事定价，但标的以国外通用型产品为主；国内制造业垂直、有交付责任边界的标的未见同量级融资记录。</p>
+</div></section>
+
+<!-- ============ 03 ============ -->
+<section id="s3"><div class="wrap">
+  <div class="shead"><span class="snum">03</span><h2>收费模式对标</h2></div>
+  <p class="lead">市场正从「席位制」向按量 / 按结果 / 按岗三分化演进。按岗（约 8000 元/月）是目前最贴近制造业 HR 预算科目（人力成本而非 IT 成本）的口径，也是灵犀「团队打包」定价的天然锚点。</p>
+
+  <div class="tbox"><table>
+    <thead><tr><th>模式</th><th>代表</th><th>具体计价</th><th>客户视角的可预期性</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td><b>按量</b></td><td>Salesforce Agentforce</td><td class="num">$2/对话</td><td>高（可按用量控预算）</td><td>官方定价 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>按量（分层）</b></td><td>ServiceNow</td><td>按 assists 计量分层</td><td>中</td><td>官方 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>按结果</b></td><td>Sierra</td><td>按解决 / 挽回计费</td><td>低风险高弹性</td><td>公开信息 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>按结果</b></td><td>百度 RaaS</td><td>按业绩分成</td><td>同上</td><td>公开信息 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>按岗</b></td><td>AI 数字员工岗位</td><td class="num v4">约 8000 元/月 + 2 万元/年技术支持</td><td>中（对标一名初级岗位人力）</td><td>每日经济新闻 2026-06 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>按岗（项目制）</b></td><td>今日人才「会议大师」</td><td class="num v4">15 万/年</td><td>中</td><td>公开信息 <span class="badge y">🟡</span></td></tr>
+      <tr><td><b>按席位 / 授权</b></td><td>影刀、金智维、腾讯云 ADP</td><td class="num">59800 元/5 账号/年；按授权数；$2500/月</td><td>高（传统采购熟悉）</td><td>官网 / 招股书 <span class="badge g">🟢</span></td></tr>
+      <tr><td><b>按池</b></td><td>阿里 QoderWake</td><td>Credit 池</td><td>中</td><td>发布信息 <span class="badge y">🟡</span></td></tr>
+    </tbody></table></div>
+  <p class="foot">Salesforce/ServiceNow 取自官方定价；影刀、腾讯云取自官网定价页；按岗价格取自每日经济新闻 2026-06 报道与今日人才公开信息；Sierra、百度 RaaS 取自公开报道。</p>
+</div></section>
+
+<!-- ============ 04 ============ -->
+<section id="s4"><div class="wrap">
+  <div class="shead"><span class="snum">04</span><h2>制造业落地案例</h2></div>
+  <p class="lead">现有案例的共同结构是「场景集合 + 单点效率提升」，交付物是系统而非岗位；中天科技把「数字员工场景数量」写进公司级行动方案，说明头部制造企业已把数字员工当作组织建设目标而非工具采购目标——这正是灵犀叙事的客户侧证据（作者观点）。</p>
+
+  <div class="cards">
+    <div class="cc"><div class="t">美的 · 荆州工厂</div><div class="v">15 分钟 → 30 秒</div><div class="d">14 个智能体覆盖 38 个场景；AI 质检首检时长大幅压缩</div><div class="s">美的公开案例材料 🟡</div></div>
+    <div class="cc"><div class="t">海尔卡奥斯 · 顺科智连</div><div class="v">99% <small>检验合格率</small></div><div class="d">工业 AI 助理落地质检环节</div><div class="s">海尔公开案例材料 🟡</div></div>
+    <div class="cc"><div class="t">联想 · 排产智能体</div><div class="v">+82% <small>交付效率</small></div><div class="d">排产环节以智能体辅助决策</div><div class="s">联想公开案例材料 🟡</div></div>
+    <div class="cc"><div class="t">广州视声 · 腾讯云 WorkBuddy</div><div class="v">2 天 → 半小时</div><div class="d">PCB 采购评估流程提效</div><div class="s">腾讯云案例 🟡</div></div>
+    <div class="cc"><div class="t">中天科技 · AI+制造行动方案</div><div class="v">1000 个 <small>数字员工场景</small></div><div class="d">目标 2030 年数字员工场景数量，写入公司级行动方案</div><div class="s">公司公告（中证网 2026-05-17）<span class="badge r">🔴 待核</span>（口径以公司公告原文为准）</div></div>
+  </div>
+  <p class="foot">案例数据均取自企业公开材料或厂商公开案例；中天科技目标取自公司公告（口径以公司公告原文为准）。</p>
+</div></section>
+
+
+<!-- ============ 附录 ============ -->
+<div class="appendix" id="apx"><div class="wrap">
+  <div class="shead"><span class="snum">附录</span><h2>数据来源清单</h2></div>
+  <ol class="srcs">
+    <li><b>S1</b> IDC，中国经济网 2026-03 报道 — 工业企业 AI 支出 900 亿 / CAGR 37.7%</li>
+    <li><b>S2</b> IDC 数据，36氪 转引（获取 2026-11-01）— 大模型/智能体企业渗透率 9.6%→47.5%</li>
+    <li><b>S3</b> 工信部发布会 — 2025 AI 核心产业规模 1.2 万亿</li>
+    <li><b>S4</b> IDC，腾讯云转引（获取 2026-11-01）— AI 智能体市场 212 亿→3320 亿（2025→2029）</li>
+    <li><b>S5</b> 爱分析 2026-07 — 数字员工市场 74.7 亿→2098.4 亿（2025→2030，CAGR 94.9%）</li>
+    <li><b>S6</b> 工信部 2025-07 行业数字化转型方案 — 四行业 82 个典型场景</li>
+    <li><b>S7</b> 实在智能官网 — 客户数、三花案例（官网自述）</li>
+    <li><b>S8</b> 金智维港交所招股书（18C 递表）— 部署/客户/营收/亏损</li>
+    <li><b>S9</b> 来也官网 — 个人版定价</li>
+    <li><b>S10</b> 影刀官网 — 创业版/企业版定价</li>
+    <li><b>S11</b> 弘玑公开案例 — 中兴数字同事案例</li>
+    <li><b>S12</b> 阿里 QoderWake 发布信息（2026-09-08）— 一句话生成岗位、Credit 池</li>
+    <li><b>S13</b> 字节豆包工作发布信息（2026-08-25）— 打通飞书</li>
+    <li><b>S14</b> 腾讯云 ADP 定价与 WorkBuddy 案例 — $2500/月、广州视声</li>
+    <li><b>S15</b> Salesforce / ServiceNow 官方定价（获取 2026-11-01）— $2/对话、按 assists 分层</li>
+    <li><b>S16</b> Cognition / 11x.ai 公开报道与官网 — Devin Pro 定价、E 轮、Alice 起价</li>
+    <li><b>S17</b> 美的 / 海尔 / 联想公开案例材料（获取 2026-11-01）</li>
+    <li><b>S18</b> 融资公开报道（2026.8–11）— Manus / Instinct / Ema / Town</li>
+    <li><b>S19</b> Sierra、百度 RaaS、每日经济新闻 2026-06、今日人才 — 按结果与按岗收费</li>
+    <li><b>S20</b> 中天科技公告（中证网 2026-05-17）— 数字员工场景目标</li>
+  </ol>
+
+</div></div>
+
+<footer>
+  《制造业 AI 员工市场分析报告》v1 · 灵犀协同智能 · 数据来源见附录 · 引用请注明出处
+</footer>
+
+</body>
+</html>
